@@ -276,6 +276,17 @@ Resources:
       CodeUri: ../lambda
       MemorySize: 3008 # All Report Functions get the max memory for speed & size
 
+  CreateAssumeRoleTrustedLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "${pResourcePrefix}-create-assumerole-trusted"
+      Description: Create HTML Report with all non compliant assumerole trusted accounts
+      Handler: report-assumerole-trusted.handler
+      Timeout: 600
+      Role: !GetAtt InventoryLambdaRole.Arn
+      CodeUri: ../lambda
+      MemorySize: 3008 # All Report Functions get the max memory for speed & size
+
   #
   # New Account Handling
   #
@@ -837,6 +848,7 @@ Resources:
               - !GetAtt CreateAccountReportLambdaFunction.Arn
               - !GetAtt CreateForeignAccountReportLambdaFunction.Arn
               - !GetAtt CreateVPCReportLambdaFunction.Arn
+              - !GetAtt CreateAssumeRoleTrustedLambdaFunction.Arn
               - !GetAtt CreateCredentialReportLambdaFunction.Arn
       - PolicyName: LambdaLogging
         PolicyDocument:
@@ -909,6 +921,16 @@ Resources:
                     "CreateVPCReportLambdaFunction": {
                       "Type": "Task",
                       "Resource": "${CreateVPCReportLambdaFunction.Arn}",
+                      "End": true
+                    }
+                  }
+                },
+                {
+                  "StartAt": "CreateAssumeRoleTrustedLambdaFunction",
+                  "States": {
+                    "CreateAssumeRoleTrustedLambdaFunction": {
+                      "Type": "Task",
+                      "Resource": "${CreateAssumeRoleTrustedLambdaFunction.Arn}",
                       "End": true
                     }
                   }
