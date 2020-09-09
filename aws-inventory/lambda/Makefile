@@ -45,6 +45,7 @@ FILES =	common.py\
 		report-foreign.py \
 		report-unified-credential-report.py \
 		report-vpcs.py \
+		report-assumerole-trust.py \
 		trigger_account_actions.py
 
 DEPENDENCIES=antiope
