@@ -157,6 +157,10 @@ Parameters:
     Description: URL to the Transformed Template this stack was deployed with (for promotion to another environment)
     Type: String
 
+  pElasticEndpoint:
+    Description: FQDN of the Endpoint for Antiope ES Domain
+    Type: String
+
 Conditions:
   cDeployElasticSearch: !Equals [ !Ref pDeployElasticSearch, True]
   cDeployCustomStack: !Not [ !Equals [ !Ref pDeployCustomStackStateMachineArn, "NONE"] ]
@@ -231,6 +235,7 @@ Resources:
           pStaggerAccelerationFactor: !Ref pStaggerAccelerationFactor
           pMaxLambdaDuration: !Ref pMaxLambdaDuration
           pDefaultLambdaSize: !Ref pDefaultLambdaSize
+          pElasticEndpoint: !Ref pElasticEndpoint
       TemplateURL: ../aws-inventory/cloudformation/Inventory-Template.yaml
       TimeoutInMinutes: 30
 

@@ -64,6 +64,10 @@ Parameters:
     Type: Number
     Default: 300
 
+  pElasticEndpoint:
+    Description: FQDN of the Endpoint for Antiope ES Domain
+    Type: String
+
 Conditions:
   EnterpriseSupport: !Equals [ !Ref pEntSupport, True]
   EBSInventory: !Equals [ !Ref pEBSInventory, True]
@@ -85,6 +89,7 @@ Globals:
           ROLE_NAME: !Ref pRoleName
           ERROR_QUEUE: !Ref pErrorHandlerEventQueueURL
           LOG_LEVEL: 'INFO'
+          ES_DOMAIN_ENDPOINT: !Ref pElasticEndpoint
 
 Resources:
 
