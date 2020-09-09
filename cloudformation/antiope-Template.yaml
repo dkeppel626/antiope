@@ -161,6 +161,10 @@ Parameters:
     Description: FQDN of the Endpoint for Antiope ES Domain
     Type: String
 
+  pElasticClusterName:
+    Description: Name of the Antiope ES Domain
+    Type: String
+
 Conditions:
   cDeployElasticSearch: !Equals [ !Ref pDeployElasticSearch, True]
   cDeployCustomStack: !Not [ !Equals [ !Ref pDeployCustomStackStateMachineArn, "NONE"] ]
@@ -236,6 +240,7 @@ Resources:
           pMaxLambdaDuration: !Ref pMaxLambdaDuration
           pDefaultLambdaSize: !Ref pDefaultLambdaSize
           pElasticEndpoint: !Ref pElasticEndpoint
+          pElasticClusterName: !Ref pElasticClusterName
       TemplateURL: ../aws-inventory/cloudformation/Inventory-Template.yaml
       TimeoutInMinutes: 30
 

@@ -68,6 +68,10 @@ Parameters:
     Description: FQDN of the Endpoint for Antiope ES Domain
     Type: String
 
+  pElasticClusterName:
+    Description: Name of the Antiope ES Domain
+    Type: String
+
 Conditions:
   EnterpriseSupport: !Equals [ !Ref pEntSupport, True]
   EBSInventory: !Equals [ !Ref pEBSInventory, True]
@@ -207,6 +211,14 @@ Resources:
               - dynamodb:UpdateItem
             Resource:
               - !GetAtt AccountDBTable.StreamArn
+      - PolicyName: ElasticSearch
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Resource: !Sub "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${pElasticClusterName}/*"
+            Action:
+            - es:*
+            Effect: Allow
 
   #
   # State Machine Functions
