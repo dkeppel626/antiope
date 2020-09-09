@@ -281,7 +281,7 @@ Resources:
     Properties:
       FunctionName: !Sub "${pResourcePrefix}-create-assumerole-trusted"
       Description: Create HTML Report with all non compliant assumerole trusted accounts
-      Handler: report-assumerole-trusted.handler
+      Handler: report-assumerole-trust.handler
       Timeout: 600
       Role: !GetAtt InventoryLambdaRole.Arn
       CodeUri: ../lambda

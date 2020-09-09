@@ -61,6 +61,7 @@ FUNCTIONS = $(RESOURCE_PREFIX)-pull-organization-data \
 			$(RESOURCE_PREFIX)-trigger-inventory \
 			$(RESOURCE_PREFIX)-get-billing-data \
 			$(RESOURCE_PREFIX)-create-account-report \
+			$(RESOURCE_PREFIX)-create-assumerole-trusted \
 			$(RESOURCE_PREFIX)-create-cred-report \
 			$(RESOURCE_PREFIX)-create-foreign-account-report \
 			$(RESOURCE_PREFIX)-create-vpc-report \
